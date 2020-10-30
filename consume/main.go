@@ -1,28 +1,32 @@
 package main
 
 import (
+	"fmt"
 	"log"
-	"time"
+	"sync"
 
 	"github.com/nats-io/nats.go"
 )
 
 func main() {
-	nc, err := nats.Connect(nats.DefaultURL)
+	nc, err := nats.Connect("0.0.0.0:4222")
+	nc.Flush()
+	defer nc.Close()
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println(nc.ConnectedServerId())
 	// Subscribe
-	sub, err := nc.SubscribeSync("Test-message")
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Wait for a message
-	msg, err := sub.NextMsg(10 * time.Hour)
-	if err != nil {
-		log.Fatal(err)
-	}
+	wg := sync.WaitGroup{}
+	wg.Add(1)
 
-	// Use the response
-	log.Printf("Reply: %s", msg.Data)
+	// Subscribe
+	if _, err := nc.Subscribe("Test-message", func(m *nats.Msg) {
+		// wg.Done()
+		fmt.Println(string(m.Data))
+	}); err != nil {
+		log.Fatal(err)
+	}
+	// Wait for a message to come in
+	wg.Wait()
 }
