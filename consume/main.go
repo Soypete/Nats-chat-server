@@ -22,7 +22,6 @@ func main() {
 
 	// Subscribe
 	if _, err := nc.Subscribe("Test-message", func(m *nats.Msg) {
-		// wg.Done()
 		fmt.Println(string(m.Data))
 	}); err != nil {
 		log.Fatal(err)

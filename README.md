@@ -5,7 +5,7 @@ This is a Chat message subscription service meant to copy the functionality of t
 
 ## TODO:
 * ~Test out Nats server with connection and publishing~
-* Get user input to nats server
+* ~Get user input to nats server~
 * add twitter/twitch/discord/slack api consumption
 * add moderator interface
 * publish chat to web address.

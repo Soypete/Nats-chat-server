@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"log"
+	"os"
 	"time"
 
 	"github.com/nats-io/nats.go"
@@ -13,8 +15,13 @@ func main() {
 		log.Fatal(err)
 	}
 	defer nc.Close()
-	// Do something with the connection
-	nc.Publish("Test-message", []byte("spam"))
-	// ND3UB7RH2YQFYNULXAPWXHCFMDDVFUUTB2YYBLOZNK3RWTVZP75TKMOC
 
+	scanner := bufio.NewScanner(os.Stdin)
+	for scanner.Scan() {
+		nc.Publish("Test-message", scanner.Bytes())
+	}
+
+	if scanner.Err() != nil {
+		// handle error.
+	}
 }
