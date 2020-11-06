@@ -7,5 +7,9 @@ This is a Chat message subscription service meant to copy the functionality of t
 * ~Test out Nats server with connection and publishing~
 * ~Get user input to nats server~
 * add twitter/twitch/discord/slack api consumption
+	Useful URLS:
+	* [twitch oauth](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth)
+	* [golang](https://golang.org/pkg/net/url/)
+	* [twitch auth example in Go](https://github.com/twitchdev/authentication-go-sample/blob/3ee8389a80a6d41bb3d70466797882e523884875/oauth-authorization-code/main.go)
 * add moderator interface
 * publish chat to web address.
