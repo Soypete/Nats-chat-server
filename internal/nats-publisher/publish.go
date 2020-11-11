@@ -1,4 +1,4 @@
-package main
+package natsbot
 
 import (
 	"bufio"
@@ -9,7 +9,8 @@ import (
 	"github.com/nats-io/nats.go"
 )
 
-func main() {
+// Publish write message to nats server
+func Publish(message string) {
 	nc, err := nats.Connect("0.0.0.0:4222", nats.FlusherTimeout(time.Minute))
 	if err != nil {
 		log.Fatal(err)
@@ -18,7 +19,7 @@ func main() {
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
-		nc.Publish("Test-message", scanner.Bytes())
+		nc.Publish(message, scanner.Bytes())
 	}
 
 	if scanner.Err() != nil {
