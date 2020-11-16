@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"strconv"
 	"time"
+
+	natsbot "github.com/Soypete/Nats-chat-server/internal/nats-publisher"
 )
 
 type SlackEvent struct {
