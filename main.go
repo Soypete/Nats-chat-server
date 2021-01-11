@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	nc, err := nats.Connect("localhost:4222")
+	nc, err := nats.Connect("0.0.0.0:4222")
 	if err != nil {
 		log.Fatal(err)
 	}
