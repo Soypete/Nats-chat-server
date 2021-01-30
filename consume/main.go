@@ -21,6 +21,10 @@ func main() {
 	wg.Add(1)
 
 	// Subscribe
+	// *NOTE* I think that this continues to handle the same message
+	// until a new message enters the queue..
+	// this to look into when refactoring
+	// subscription/Requests/handler/msghandler
 	if _, err := nc.Subscribe("Test-message", func(m *nats.Msg) {
 		fmt.Println(string(m.Data))
 	}); err != nil {
