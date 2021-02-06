@@ -1,10 +1,10 @@
-module github.com/Soypete/nats-chat-server
+module github.com/Soypete/Nats-chat-server
 
 go 1.13
 
 require (
-	github.com/go-irc/irc v2.1.0+incompatible // indirect
+	github.com/nats-io/nats-server/v2 v2.1.9 // indirect
 	github.com/nats-io/nats.go v1.10.0
-	golang.org/x/oauth2 v0.0.0-20200902213428-5d25da1a8d43
-	gopkg.in/irc.v3 v3.1.3
+	golang.org/x/oauth2 v0.0.0-20210126194326-f9ce19ea3013
+	gopkg.in/irc.v3 v3.1.4
 )

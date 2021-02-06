@@ -1,35 +1,41 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"sync"
+	"math/rand"
+	"time"
 
-	"github.com/nats-io/nats.go"
+	n "github.com/Soypete/Nats-chat-server/internal/nats-publisher"
 )
 
-func main() {
-	nc, err := nats.Connect("0.0.0.0:4222")
-	if err != nil {
-		log.Fatal(err)
+func RunSpam(nc *n.NatsClient) {
+	for {
+		// generate random sentences
+		sentence := getText()
+		// publish sentence
+		nc.Publish(sentence)
+		// wait 30 sec
+		time.Sleep(30)
 	}
-	defer nc.Close()
-	// Use a WaitGroup to wait for a message to arrive
-	wg := sync.WaitGroup{}
-	wg.Add(1)
+}
 
-	// Subscribe
-	if _, err := nc.Subscribe("Test-message", func(m *nats.Msg) {
-		// wg.Done()
-		fmt.Println(string(m.Data))
-	}); err != nil {
-		log.Fatal(err)
-	}
-	// Do something with the connection
-	err = nc.Publish("Test-message", []byte("hello server"))
+func main() {
+	nc, err := n.Setup()
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
-	// Wait for a message to come in
-	wg.Wait()
+	defer nc.Connection.Close()
+	RunSpam(nc)
+}
+
+func getText() string {
+	rand.Seed(time.Now().Unix())
+	answers := []string{
+		"Follow soypete01 on twitch",
+		"Check out my meetups",
+		"Follow Me on Twitter",
+		"Do you want to see more of my dogs?",
+		"Say hi in chat",
+		"Do you want me to work on the cloud technologies",
+	}
+	return answers[rand.Intn(len(answers))]
 }

@@ -1,28 +1,24 @@
 package natsbot
 
 import (
-	"bufio"
-	"log"
-	"os"
 	"time"
 
 	"github.com/nats-io/nats.go"
 )
 
-// Publish write message to nats server
-func Publish(message string) {
+type NatsClient struct {
+	Connection *nats.Conn
+}
+
+func Setup() (*NatsClient, error) {
 	nc, err := nats.Connect("0.0.0.0:4222", nats.FlusherTimeout(time.Minute))
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
-	defer nc.Close()
+	return &NatsClient{connection: nc}, nil
+}
 
-	scanner := bufio.NewScanner(os.Stdin)
-	for scanner.Scan() {
-		nc.Publish(message, scanner.Bytes())
-	}
-
-	if scanner.Err() != nil {
-		// handle error.
-	}
+// Publish write message to nats server
+func (nc *NatsClient) Publish(message string) {
+	nc.Connection.Publish("Test-message", []byte(message))
 }
