@@ -15,7 +15,7 @@ func Setup() (*NatsClient, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &NatsClient{connection: nc}, nil
+	return &NatsClient{Connection: nc}, nil
 }
 
 // Publish write message to nats server

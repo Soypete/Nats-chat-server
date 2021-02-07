@@ -13,3 +13,7 @@ This is a Chat message subscription service meant to copy the functionality of t
 	* [twitch auth example in Go](https://github.com/twitchdev/authentication-go-sample/blob/3ee8389a80a6d41bb3d70466797882e523884875/oauth-authorization-code/main.go)
 * add moderator interface
 * publish chat to web address.
+
+
+*NOTES*
+here is a [link](https://synadia.com/ngs/pricing) for hosted nats jetstream is you want to use the free tier in the future... miriah. 

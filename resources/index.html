@@ -2,8 +2,12 @@
 <html>
 <body>
 
-<h1>TEST PAGE</h1>
-<p>This is your starting point for you Drew!</p>
+<h1>Messages go here</h1>
+<ul>
+    {{range .Messages}}
+	<li>{{.Time}}: {{.Text}}</li>
+    {{end}}
+</ul>
 
 </body>
 </html>

@@ -2,7 +2,7 @@ version: "2"
 
 services: 
   nats: 
-    image: 'nats:latest' 
+    image: 'synadia/jsm:latest' 
     ports: 
       - "4222:4222"
       - "8222:8222"
